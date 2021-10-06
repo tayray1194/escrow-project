@@ -89,7 +89,7 @@ ethereumButton.addEventListener('click', () => {
 async function getAccounts() {
 
     // fetch contract ABI's
-    const _escrowABI = await fetch("./js/abis/escrow.json")
+    const _escrowABI = await fetch("./js/abis/Escrow.json")
         .then(response => {
             console.log('Loaded escrowABI');
             return response.json();
