@@ -1,29 +1,29 @@
 
 
 // contract address
-const ESCROW_ADDRESS = "0x89AEDeb8f8921C9985f8A2dd1578347Eb04D760D";
+const ESCROW_ADDRESS = "0x4f126377896612135d8Cb983cd066bf413218063";
 
 
 // LOGIC to connect metamask
 if (typeof window.ethereum !== 'undefined') {
-  console.log('MetaMask is installed!');
+    console.log('MetaMask is installed!');
 } else {
-  console.log('Install MetaMask')
-  document.querySelector('#ethereum-button')
-  .innerHTML = "a href='https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn' target='_blank'>Install MetaMask</a>";
-  document.querySelector('.intro').style.display = 'none';
+    console.log('Install MetaMask')
+    document.querySelector('#ethereum-button')
+        .innerHTML = "a href='https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn' target='_blank'>Install MetaMask</a>";
+    document.querySelector('.intro').style.display = 'none';
 }
 
 
 const ethEnabled = async () => {
-  if (window.ethereum) {
-    await window.ethereum.send('eth_requestAccounts');
-    window.web3 = new Web3(window.ethereum);
-    console.log('web3.js initialized');
-    return true;
-  }
-  console.log('web3.js NOT initialized');
-  return false;
+    if (window.ethereum) {
+        await window.ethereum.send('eth_requestAccounts');
+        window.web3 = new Web3(window.ethereum);
+        console.log('web3.js initialized');
+        return true;
+    }
+    console.log('web3.js NOT initialized');
+    return false;
 }
 
 //======================================================================================================================
@@ -32,60 +32,41 @@ const ethEnabled = async () => {
 //
 //======================================================================================================================
 // form fields
-const limitOrderAddressInput = document.querySelector('#Limit-Order-Address');
-const inputTokenAddressInput = document.querySelector('#Input-Token-Address');
-const outputTokenAddressInput = document.querySelector('#Output-Token-Address');
-const inputTokenAmountInput = document.querySelector('#Input-Token-Amount');
-const outputTokenAmountInput = document.querySelector('#Output-Token-Amount');
-const recipientInput = document.querySelector('#Recipient');
-const deadlineInput = document.querySelector('#Deadline');
-const swapTypeInput = document.querySelector('#Swap-Type');
-const orderNumberRemoveOrderInput = document.querySelector('#Order-Number');
-const orderNumberViewOrderInput = document.querySelector('#Order-Number-2');
-const inputTokenAddressLabel = document.querySelector('#Input-Token-Address-2');
-const outputTokenAddressLabel = document.querySelector('#Output-Token-Address-2');
-const inputTokenAmountLabel = document.querySelector('#Input-Token-Amount-2');
-const outputTokenAmountLabel = document.querySelector('#Output-Token-Amount-2');
-const recipientLabel = document.querySelector('#Recipient-2');
-const deadlineLabel = document.querySelector('#Deadline-2');
-const swapTypeLabel = document.querySelector('#Swap-Type-2');
-const stakingContractAddressInput = document.querySelector('#Staking-Contract-Address');
-const depositAmountInput = document.querySelector('#Amount');
-const withdrawAmountInput = document.querySelector('#Amount-3');
-const approvedTokenAddressInput = document.querySelector('#Approved-Token-Address');
-const spenderAddressInput = document.querySelector('#Spender-Address');
-const approvedTokenAmountInput = document.querySelector('#Amount-2');
-const tokenAddressInput = document.querySelector('#Token-Address');
-const tokenBalanceLabel = document.querySelector('#Token-Balance');
-const ETHBalanceLabel = document.querySelector('#ETH-Balance');
-const jobCountLabel = document.querySelector('#Job-Count');
-const feeAmountLabel = document.querySelector('#Fee-Amount');
-const BNBAmountInput = document.querySelector('#BNB-Amount');
-const gasFeeAmountLabel = document.querySelector('#Gas-Fee-Amount');
-const userAddressForUserBalanceInput = document.querySelector('#User-Address');
-const userBalanceLabel = document.querySelector('#User-Balance');
-const userAddressForCheckForUpdateInput = document.querySelector('#User-Address-2');
-const orderNumberCheckForUpdateInput = document.querySelector('#Order-Number-3');
-const updateLabel = document.querySelector('#Update');
-
-
+const productPriceInput = document.querySelector('#Product-Price');
+const checkFundsLabel = document.querySelector('#Check-Funds-Label');
+const isProductShippedInput = document.querySelector('#Is-Product-Shipped');
+const shipmentStatusLabel = document.querySelector('#Shipment-Status-Label');
+const updateBuyerAddressInput = document.querySelector('#Update-Buyer-Address');
+const updateSellerAddressInput = document.querySelector('#Update-Seller-Address');
+const updateEscrowAgentAddressInput = document.querySelector('#Update-Escrow-Agent-Address');
+const updateArbitrationFeePercentageInput = document.querySelector('#Update-Arbitration-Fee-Percentage');
+const userAddressInput = document.querySelector('#User-Address');
+const userBalanceLabel = document.querySelector('#User-Balance-Label');
+const buyerAddressLabel = document.querySelector('#Buyer-Address-Label');
+const sellerAddressLabel = document.querySelector('#Seller-Address-Label');
+const escrowAgentAddressLabel = document.querySelector('#Escrow-Agent-Address-Label');
+const arbitrationFeeLabel = document.querySelector('#Arbitration-Fee-Label');
+const productPriceLabel = document.querySelector('#Product-Price-Label');
 
 
 // buttons
-const createOrderButton = document.querySelector('#Create-Order-Button');
-const removeOrderButton = document.querySelector('#Remove-Order-Button');
-const viewOrderButton = document.querySelector('#View-Order-Button');
-const depositButton = document.querySelector('#Deposit-Button');
-const withdrawButton = document.querySelector('#Withdraw-Button');
-const approveButton = document.querySelector('#Approve-Button');
-const getTokenBalanceButton = document.querySelector('#Get-Token-Balance-Button');
-const getETHBalanceButton = document.querySelector('#Get-ETH-Balance-Button');
-const getJobCountButton = document.querySelector('#Get-Job-Count-Button');
-const getFeeAmountButton = document.querySelector('#Get-Fee-Amount-Button');
-const getGasFeeAmountButton = document.querySelector('#Get-Gas-Fee-Amount-Button');
-const getUserBalanceButton = document.querySelector('#Get-User-Balance-Button');
-const checkForUpdateButton = document.querySelector('#Check-For-Update-Button');
-const liquidateOrderButton = document.querySelector('#Liquidate-Order-Button');
+const setProductPriceButton = document.querySelector('#Set-Product-Price-Button');
+const checkFundsButton = document.querySelector('#Check-Funds-Button');
+const confirmShipmentButton = document.querySelector('#Confirm-Shipment-Button');
+const shipmentStatusButton = document.querySelector('#Shipment-Status-Button');
+const transferFundsToSellerButton = document.querySelector('#Transfer-Funds-To-Seller-Button');
+const returnFundsToBuyerButton = document.querySelector('#Return-Funds-To-Buyer-Button');
+const updateBuyerAddressButton = document.querySelector('#Update-Buyer-Address-Button');
+const updateSellerAddressButton = document.querySelector('#Update-Seller-Address-Button');
+const updateEscrowAgentAddressButton = document.querySelector('#Update-Escrow-Agent-Address-Button');
+const updateArbitrationFeePercentageButton = document.querySelector('#Update-Arbitration-Fee-Percentage-Button');
+const checkUserBalanceButton = document.querySelector('#Check-User-Balance-Button');
+const checkBuyerAddressButton = document.querySelector('#Check-Buyer-Address-Button');
+const checkSellerAddressButton = document.querySelector('#Check-Seller-Address-Button');
+const checkEscrowAgentAddressButton = document.querySelector('#Check-Escrow-Agent-Address-Button');
+const checkArbitrationFeeButton = document.querySelector('#Check-Arbitration-Fee-Button');
+const checkProductPriceButton = document.querySelector('#Check-Product-Price-Button');
+const newEscrowProductButton = document.querySelector('#New-Escrow-Product-Button');
 
 
 
@@ -108,47 +89,15 @@ ethereumButton.addEventListener('click', () => {
 async function getAccounts() {
 
     // fetch contract ABI's
-    const _erc20ABI = await fetch("./js/abis/IERC20.json")
+    const _escrowABI = await fetch("./js/abis/escrow.json")
         .then(response => {
-            console.log('Loaded erc20ABI');
+            console.log('Loaded escrowABI');
             return response.json();
         })
         .catch(function (err) {
             console.log(err);
         });
-    const erc20ABI = _erc20ABI["abi"];
-
-
-    const _wethABI = await fetch("./js/abis/weth.json")
-        .then(response => {
-            console.log('Loaded wethABI');
-            return response.json();
-        })
-        .catch(function (err) {
-            console.log(err);
-        });
-    const wethABI = _wethABI["abi"];
-
-
-    const _limitOrderABI = await fetch("./js/abis/limitOrder3.json")
-        .then(response => {
-            console.log('Loaded limitOrderABI');
-            return response.json();
-        })
-        .catch(function (err) {
-            console.log(err);
-        });
-    const limitOrderABI = _limitOrderABI["abi"];
-
-    const _stakingABI = await fetch("./js/abis/staking.json")
-        .then(response => {
-            console.log('Loaded stakingABI');
-            return response.json();
-        })
-        .catch(function (err) {
-            console.log(err);
-        });
-    const stakingABI = _stakingABI["abi"];
+    const escrowABI = _escrowABI["abi"];
 
     //======================================================================================================================
     //
@@ -156,275 +105,288 @@ async function getAccounts() {
     //
     //======================================================================================================================
 
-    createOrderButton.addEventListener('click',  () => {
+    setProductPriceButton.addEventListener('click',  () => {
 
-        const _limitOrderAddress = web3.utils.toChecksumAddress(limitOrderAddressInput.value);
-        const _tokenIn = web3.utils.toChecksumAddress(inputTokenAddressInput.value);
-        const _tokenOut = web3.utils.toChecksumAddress(outputTokenAddressInput.value);
-        const _tokenInAmount = web3.utils.toWei(web3.utils.fromWei(inputTokenAmountInput.value, 'ether'), 'ether');
-        const _tokenOutAmount = web3.utils.toWei(web3.utils.fromWei(outputTokenAmountInput.value, 'ether'), 'ether');
-        const _recipient = web3.utils.toChecksumAddress(recipientInput.value);
-        const _deadline = deadlineInput.value;
-        const _swapType = swapTypeInput.value;
-        const limitOrderContract = new web3.eth.Contract(limitOrderABI, _limitOrderAddress);
+        const _escrowAddress = web3.utils.toChecksumAddress(ESCROW_ADDRESS);
+        const _productPrice = web3.utils.toWei(web3.utils.fromWei(productPriceInput.value, 'ether'), 'ether');
+        const escrowContract = new web3.eth.Contract(escrowABI, _escrowAddress);
 
-        let tx_builder = limitOrderContract.methods.createOrder(
-            _tokenIn,
-            _tokenOut,
-            _tokenInAmount,
-            _tokenOutAmount,
-            _recipient,
-            _deadline,
-            _swapType);
-        let encoded_tx = tx_builder.encodeABI();
-        if (_swapType < 12) {
-            let transactionObject = {
-                data: encoded_tx,
-                from: account,
-                to: _limitOrderAddress,
-                value: _tokenInAmount
-            };
-
-            console.log('Sending createOrder transaction...');
-            web3.eth.sendTransaction(transactionObject)
-                .then(function(receipt){
-                    console.log('createOrder transaction receipt received!');
-                    console.log(receipt);
-                });
-        }
-
-        else {
-            let transactionObject = {
-                data: encoded_tx,
-                from: account,
-                to: _limitOrderAddress,
-            };
-
-            console.log('Sending createOrder transaction...');
-            web3.eth.sendTransaction(transactionObject)
-                .then(function(receipt){
-                    console.log('createOrder transaction receipt received!');
-                    console.log(receipt);
-                });
-        }
-
-
-    });
-
-    removeOrderButton.addEventListener('click',  () => {
-
-        const _limitOrderAddress = web3.utils.toChecksumAddress(limitOrderAddressInput.value);
-        const _orderNumber = orderNumberRemoveOrderInput.value;
-        const limitOrderContract = new web3.eth.Contract(limitOrderABI, _limitOrderAddress);
-
-        let tx_builder = limitOrderContract.methods.removeOrder(_orderNumber);
+        let tx_builder = escrowContract.methods.setProductPrice(
+            _productPrice);
         let encoded_tx = tx_builder.encodeABI();
         let transactionObject = {
             data: encoded_tx,
             from: account,
-            to: _limitOrderAddress
+            to: _escrowAddress,
         };
 
-        console.log('Sending removeOrder transaction...');
+        console.log('Sending setProductPrice transaction...');
         web3.eth.sendTransaction(transactionObject)
             .then(function(receipt){
-                console.log('removeOrder transaction receipt received!');
+                console.log('setProductPrice transaction receipt received!');
                 console.log(receipt);
             });
     });
 
-    viewOrderButton.addEventListener('click',  async () => {
+    checkFundsButton.addEventListener('click',  async () => {
 
-        const _orderNumber = orderNumberViewOrderInput.value;
-        console.log(_orderNumber);
-        console.log(account);
-        const _limitOrderAddress = web3.utils.toChecksumAddress(limitOrderAddressInput.value);
-        const limitOrderContract = new web3.eth.Contract(limitOrderABI, _limitOrderAddress);
-        const viewOrder = await limitOrderContract.methods.viewOrder(_orderNumber).call({from: account});
-
-        inputTokenAddressLabel.innerHTML = 'Input Token Address: ' + viewOrder[0];
-        outputTokenAddressLabel.innerHTML = 'Output Token Address: ' + viewOrder[1];
-        inputTokenAmountLabel.innerHTML = 'Input Token Amount: ' + viewOrder[2];
-        outputTokenAmountLabel.innerHTML = 'Output Token Amount: ' + viewOrder[3];
-        recipientLabel.innerHTML = 'Recipient: ' + viewOrder[4];
-        deadlineLabel.innerHTML = 'Deadline: ' + viewOrder[5];
-        swapTypeLabel.innerHTML = 'Swap Type: ' + viewOrder[6];
+        const _escrowAddress = web3.utils.toChecksumAddress(ESCROW_ADDRESS);
+        const escrowContract = new web3.eth.Contract(escrowABI, _escrowAddress);
+        const checkFunds = await escrowContract.methods.checkFunds().call();
+        checkFundsLabel.innerHTML = 'Check Funds: ' + checkFunds;
 
     });
 
-    depositButton.addEventListener('click', () => {
+    confirmShipmentButton.addEventListener('click',  () => {
 
-        const _stakingAddress = web3.utils.toChecksumAddress(stakingContractAddressInput.value);
-        const _amountIn = web3.utils.toWei(web3.utils.fromWei(depositAmountInput.value, 'ether'), 'ether');
-        const stakingContract = new web3.eth.Contract(stakingABI, _stakingAddress);
+        const _escrowAddress = web3.utils.toChecksumAddress(ESCROW_ADDRESS);
+        const _isProductShipped = isProductShippedInput.value;
+        const escrowContract = new web3.eth.Contract(escrowABI, _escrowAddress);
 
-        let tx_builder = stakingContract.methods.deposit(_amountIn);
+        let tx_builder = escrowContract.methods.confirmShipment(
+            _isProductShipped);
         let encoded_tx = tx_builder.encodeABI();
         let transactionObject = {
             data: encoded_tx,
             from: account,
-            to: _stakingAddress
+            to: _escrowAddress,
         };
 
-        console.log('Sending deposit transaction...');
+        console.log('Sending confirmShipment transaction...');
         web3.eth.sendTransaction(transactionObject)
             .then(function(receipt){
-                console.log('Deposit transaction receipt received!');
+                console.log('confirmShipment transaction receipt received!');
                 console.log(receipt);
             });
     });
 
-    withdrawButton.addEventListener('click',  () => {
+    shipmentStatusButton.addEventListener('click',  async () => {
 
-        const _stakingAddress = web3.utils.toChecksumAddress(stakingContractAddressInput.value);
-        const _amountOut = web3.utils.toWei(web3.utils.fromWei(withdrawAmountInput.value, 'ether'), 'ether');
-        const stakingContract = new web3.eth.Contract(stakingABI, _stakingAddress);
+        const _escrowAddress = web3.utils.toChecksumAddress(ESCROW_ADDRESS);
+        const escrowContract = new web3.eth.Contract(escrowABI, _escrowAddress);
+        const shipmentStatus = await escrowContract.methods.shipmentStatus().call();
+        shipmentStatusLabel.innerHTML = 'Shipment Status: ' + shipmentStatus;
 
-        let tx_builder = stakingContract.methods.withdraw(_amountOut);
+    });
+
+    transferFundsToSellerButton.addEventListener('click',  () => {
+
+        const _escrowAddress = web3.utils.toChecksumAddress(ESCROW_ADDRESS);
+        const escrowContract = new web3.eth.Contract(escrowABI, _escrowAddress);
+
+        let tx_builder = escrowContract.methods.transferFundsToSeller();
         let encoded_tx = tx_builder.encodeABI();
         let transactionObject = {
             data: encoded_tx,
             from: account,
-            to: _stakingAddress
+            to: _escrowAddress
         };
 
-        console.log('Sending withdraw transaction...');
+        console.log('Sending transferFundsToSeller transaction...');
         web3.eth.sendTransaction(transactionObject)
             .then(function(receipt){
-                console.log('Withdraw transaction receipt received!');
+                console.log('transferFundsToSeller transaction receipt received!');
                 console.log(receipt);
             });
     });
 
-    approveButton.addEventListener('click', () => {
+    returnFundsToBuyerButton.addEventListener('click',  () => {
 
-        console.log('Approve button clicked');
-        const _tokenIn = web3.utils.toChecksumAddress(approvedTokenAddressInput.value);
-        const _amountIn = web3.utils.toWei(web3.utils.fromWei(approvedTokenAmountInput.value, 'ether'), 'ether');
-        const tokenContract = new web3.eth.Contract(erc20ABI, _tokenIn);
-        const spenderAddress = web3.utils.toChecksumAddress(spenderAddressInput.value);
+        const _escrowAddress = web3.utils.toChecksumAddress(ESCROW_ADDRESS);
+        const escrowContract = new web3.eth.Contract(escrowABI, _escrowAddress);
 
-        let tx_builder = tokenContract.methods.approve(spenderAddress, _amountIn);
+        let tx_builder = escrowContract.methods.returnFundsToBuyer();
         let encoded_tx = tx_builder.encodeABI();
         let transactionObject = {
             data: encoded_tx,
             from: account,
-            to: _tokenIn
+            to: _escrowAddress
         };
 
-        console.log('Sending approval transaction...');
+        console.log('Sending returnFundsToBuyer transaction...');
         web3.eth.sendTransaction(transactionObject)
             .then(function(receipt){
-                console.log('Approval transaction receipt received!');
+                console.log('returnFundsToBuyer transaction receipt received!');
                 console.log(receipt);
-        });
-
-
+            });
     });
 
-    getTokenBalanceButton.addEventListener('click', async () => {
+    updateBuyerAddressButton.addEventListener('click',  () => {
 
-        const _tokenIn = web3.utils.toChecksumAddress(tokenAddressInput.value);
-        const tokenContract = new web3.eth.Contract(erc20ABI, _tokenIn);
-        const tokenBalance = await tokenContract.methods.balanceOf(account).call();
-        const decimals = await tokenContract.methods.decimals().call();
-        const Balance = tokenBalance/Math.pow(10, decimals);
-        tokenBalanceLabel.innerHTML = 'Token Balance: ' + Balance;
+        const _escrowAddress = web3.utils.toChecksumAddress(ESCROW_ADDRESS);
+        const _buyerAddress = web3.utils.toChecksumAddress(updateBuyerAddressInput.value);
+        const escrowContract = new web3.eth.Contract(escrowABI, _escrowAddress);
 
+        let tx_builder = escrowContract.methods.updateBuyerAddress(_buyerAddress);
+        let encoded_tx = tx_builder.encodeABI();
+        let transactionObject = {
+            data: encoded_tx,
+            from: account,
+            to: _escrowAddress
+        };
+
+        console.log('Sending updateBuyerAddress transaction...');
+        web3.eth.sendTransaction(transactionObject)
+            .then(function(receipt){
+                console.log('updateBuyerAddress transaction receipt received!');
+                console.log(receipt);
+            });
     });
 
-    getETHBalanceButton.addEventListener('click', async () => {
+    updateSellerAddressButton.addEventListener('click',  () => {
 
-        const ETHbalance = await web3.eth.getBalance(account);
-        ETHBalanceLabel.innerHTML = 'ETH Balance: ' + web3.utils.fromWei(ETHbalance, 'ether');
+        const _escrowAddress = web3.utils.toChecksumAddress(ESCROW_ADDRESS);
+        const _sellerAddress = web3.utils.toChecksumAddress(updateSellerAddressInput.value);
+        const escrowContract = new web3.eth.Contract(escrowABI, _escrowAddress);
 
+        let tx_builder = escrowContract.methods.updateSellerAddress(_sellerAddress);
+        let encoded_tx = tx_builder.encodeABI();
+        let transactionObject = {
+            data: encoded_tx,
+            from: account,
+            to: _escrowAddress
+        };
+
+        console.log('Sending updateSellerAddress transaction...');
+        web3.eth.sendTransaction(transactionObject)
+            .then(function(receipt){
+                console.log('updateSellerAddress transaction receipt received!');
+                console.log(receipt);
+            });
     });
 
-    getJobCountButton.addEventListener('click', async () => {
+    updateEscrowAgentAddressButton.addEventListener('click',  () => {
 
-        const _limitOrderAddress = web3.utils.toChecksumAddress(limitOrderAddressInput.value);
-        const limitOrderContract = new web3.eth.Contract(limitOrderABI, _limitOrderAddress);
-        const jobCount = await limitOrderContract.methods.checkJobCountForUser(account).call();
-        jobCountLabel.innerHTML = 'Job Count: ' + jobCount;
+        const _escrowAddress = web3.utils.toChecksumAddress(ESCROW_ADDRESS);
+        const _escrowAgentAddress = web3.utils.toChecksumAddress(updateEscrowAgentAddressInput.value);
+        const escrowContract = new web3.eth.Contract(escrowABI, _escrowAddress);
 
+        let tx_builder = escrowContract.methods.updateEscrowAgentAddress(_escrowAgentAddress);
+        let encoded_tx = tx_builder.encodeABI();
+        let transactionObject = {
+            data: encoded_tx,
+            from: account,
+            to: _escrowAddress
+        };
+
+        console.log('Sending updateEscrowAgentAddress transaction...');
+        web3.eth.sendTransaction(transactionObject)
+            .then(function(receipt){
+                console.log('updateEscrowAgentAddress transaction receipt received!');
+                console.log(receipt);
+            });
     });
 
-    getFeeAmountButton.addEventListener('click',  async () => {
+    updateArbitrationFeePercentageButton.addEventListener('click',  () => {
 
-        const _limitOrderAddress = web3.utils.toChecksumAddress(limitOrderAddressInput.value);
-        const limitOrderContract = new web3.eth.Contract(limitOrderABI, _limitOrderAddress);
-        const _feeAmount = await limitOrderContract.methods.getFeeAmount().call();
-        const feeAmount = _feeAmount/Math.pow(10, 18);
-        feeAmountLabel.innerHTML = 'Fee Amount: ' + feeAmount;
+        const _escrowAddress = web3.utils.toChecksumAddress(ESCROW_ADDRESS);
+        const _arbitrationFeePercentage = updateArbitrationFeePercentageInput.value
+        const escrowContract = new web3.eth.Contract(escrowABI, _escrowAddress);
 
+        let tx_builder = escrowContract.methods.updateArbitrationFeePercentage(_arbitrationFeePercentage);
+        let encoded_tx = tx_builder.encodeABI();
+        let transactionObject = {
+            data: encoded_tx,
+            from: account,
+            to: _escrowAddress
+        };
+
+        console.log('Sending updateArbitrationFeePercentage transaction...');
+        web3.eth.sendTransaction(transactionObject)
+            .then(function(receipt){
+                console.log('updateArbitrationFeePercentage transaction receipt received!');
+                console.log(receipt);
+            });
     });
 
-    getGasFeeAmountButton.addEventListener('click',  async () => {
+    checkUserBalanceButton.addEventListener('click',  async () => {
 
-        const _limitOrderAddress = web3.utils.toChecksumAddress(limitOrderAddressInput.value);
-        const limitOrderContract = new web3.eth.Contract(limitOrderABI, _limitOrderAddress);
-        const _BNBAmount = web3.utils.toWei(web3.utils.fromWei(BNBAmountInput.value, 'ether'), 'ether');
-        const _gasFeeAmount = await limitOrderContract.methods.getGasFeeAmount(_BNBAmount).call();
-        const gasFeeAmount = _gasFeeAmount/Math.pow(10, 18);
-        gasFeeAmountLabel.innerHTML = 'Gas Fee Amount: ' + gasFeeAmount;
-
-    });
-
-    getUserBalanceButton.addEventListener('click',  async () => {
-
-        const _stakingAddress = web3.utils.toChecksumAddress(stakingContractAddressInput.value);
-        const stakingContract = new web3.eth.Contract(stakingABI, _stakingAddress);
-        const _userAddress = web3.utils.toChecksumAddress(userAddressForUserBalanceInput.value);
-        const _userBalance = await stakingContract.methods.getUserBalance(_userAddress).call();
-        const userBalance = _userBalance/Math.pow(10, 18);
+        const _escrowAddress = web3.utils.toChecksumAddress(ESCROW_ADDRESS);
+        const _userAddress = web3.utils.toChecksumAddress(userAddressInput.value);
+        const escrowContract = new web3.eth.Contract(escrowABI, _escrowAddress);
+        const userBalance = await escrowContract.methods.checkUserBalance(_userAddress).call();
         userBalanceLabel.innerHTML = 'User Balance: ' + userBalance;
 
     });
 
-    checkForUpdateButton.addEventListener('click',  async () => {
+    checkBuyerAddressButton.addEventListener('click',  async () => {
 
-        const _limitOrderAddress = web3.utils.toChecksumAddress(limitOrderAddressInput.value);
-        const limitOrderContract = new web3.eth.Contract(limitOrderABI, _limitOrderAddress);
-        const _userAddress = web3.utils.toChecksumAddress(userAddressForCheckForUpdateInput.value);
-        const _orderNumber = orderNumberCheckForUpdateInput.value;
-        const _update = await limitOrderContract.methods.checkForUpdate(_userAddress, _orderNumber).call();
-        updateLabel.innerHTML = 'Update: ' + _update;
+        const _escrowAddress = web3.utils.toChecksumAddress(ESCROW_ADDRESS);
+        const escrowContract = new web3.eth.Contract(escrowABI, _escrowAddress);
+        const buyerAddress = await escrowContract.methods.checkBuyerAddress().call();
+        buyerAddressLabel.innerHTML = 'Buyer Address: ' + buyerAddress;
 
     });
 
-    liquidateOrderButton.addEventListener('click', () => {
+    checkSellerAddressButton.addEventListener('click',  async () => {
 
-        const _limitOrderAddress = web3.utils.toChecksumAddress(limitOrderAddressInput.value);
-        const limitOrderContract = new web3.eth.Contract(limitOrderABI, _limitOrderAddress);
+        const _escrowAddress = web3.utils.toChecksumAddress(ESCROW_ADDRESS);
+        const escrowContract = new web3.eth.Contract(escrowABI, _escrowAddress);
+        const sellerAddress = await escrowContract.methods.checkSellerAddress().call();
+        sellerAddressLabel.innerHTML = 'Seller Address: ' + sellerAddress;
 
-        let tx_builder = limitOrderContract.methods.update(account, 0);
+    });
+
+    checkEscrowAgentAddressButton.addEventListener('click',  async () => {
+
+        const _escrowAddress = web3.utils.toChecksumAddress(ESCROW_ADDRESS);
+        const escrowContract = new web3.eth.Contract(escrowABI, _escrowAddress);
+        const escrowAgentAddress = await escrowContract.methods.checkEscrowAgentAddress().call();
+        escrowAgentAddressLabel.innerHTML = 'Escrow Agent Address: ' + escrowAgentAddress;
+
+    });
+
+    checkArbitrationFeeButton.addEventListener('click',  async () => {
+
+        const _escrowAddress = web3.utils.toChecksumAddress(ESCROW_ADDRESS);
+        const escrowContract = new web3.eth.Contract(escrowABI, _escrowAddress);
+        const arbitrationFee = await escrowContract.methods.checkArbitrationFee().call();
+        arbitrationFeeLabel.innerHTML = 'Arbitration Fee: ' + arbitrationFee;
+
+    });
+
+    checkProductPriceButton.addEventListener('click',  async () => {
+
+        const _escrowAddress = web3.utils.toChecksumAddress(ESCROW_ADDRESS);
+        const escrowContract = new web3.eth.Contract(escrowABI, _escrowAddress);
+        const productPrice = await escrowContract.methods.checkProductPrice().call();
+        productPriceLabel.innerHTML = 'Product Price: ' + productPrice;
+
+    });
+
+    newEscrowProductButton.addEventListener('click',  () => {
+
+        const _escrowAddress = web3.utils.toChecksumAddress(ESCROW_ADDRESS);
+        const escrowContract = new web3.eth.Contract(escrowABI, _escrowAddress);
+
+        let tx_builder = escrowContract.methods.newEscrowProduct();
         let encoded_tx = tx_builder.encodeABI();
         let transactionObject = {
             data: encoded_tx,
             from: account,
-            to: _limitOrderAddress
+            to: _escrowAddress
         };
 
-        console.log('Sending update transaction...');
+        console.log('Sending newEscrowProduct transaction...');
         web3.eth.sendTransaction(transactionObject)
             .then(function(receipt){
-                console.log('Update transaction receipt received!');
+                console.log('newEscrowProduct transaction receipt received!');
                 console.log(receipt);
             });
     });
 
-   const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-   const account = accounts[0];
-   ethereumButton.innerHTML = account;
+    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+    const account = accounts[0];
+    ethereumButton.innerHTML = account;
 
-      let web3 = new Web3(Web3.givenProvider || "ws://localhost:8545");
-     if (web3) {
-       console.log('web3');
-     } else { console.log('NO web3'); }
+    let web3 = new Web3(Web3.givenProvider || "ws://localhost:8545");
+    if (web3) {
+        console.log('web3');
+    } else { console.log('NO web3'); }
 
 
-      const BN = web3.utils.BN;
-      const balance = await web3.eth.getBalance(account);
+    const BN = web3.utils.BN;
+    const balance = await web3.eth.getBalance(account);
 
 
 
